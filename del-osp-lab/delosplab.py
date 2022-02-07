@@ -37,7 +37,6 @@ strspec = {"cpu": "4", "mem": "8192", "hdd": 100}
 ipblock = "192.168.1."
 ipstart = 211
 ipgw = "192.168.1.1"
-timeout = 120 #time to wait after instance creation
 ##########################################Create Ansible VM############################################
 for i in anshosts:
     print (colors.fg.green,"\n Adding image for Ansible VM",colors.reset)
