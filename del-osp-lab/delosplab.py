@@ -111,7 +111,7 @@ for i in comphosts:
     chcompssh.sendline(shutdown)    
     time.sleep(10)
     chcompssh.expect(':~#')
-    vdelete = ("virsh undefine comp-{} --remove-all-storage".format(i))
+    vdelete = ("virsh undefine comp-{} --remove-all-storage".format(ipstart))
     chcompssh.sendline(vdelete)
     chcompssh.expect(':~#')
     print ("\n Output of virsh undefine command: {}".format(chcompssh.before.decode()))
