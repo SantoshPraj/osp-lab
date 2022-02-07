@@ -18,6 +18,7 @@ strspec = {"cpu": "4", "mem": "8192", "hdd": 100}
 ipblock = "192.168.1."
 ipstart = 211
 ipgw = "192.168.1.1"
+timeout = 120 #time to wait after instance creation
 ##########################################Create Ansible VM############################################
 for i in anshosts:
     print ("\n Adding image for Ansible VM")
@@ -47,7 +48,7 @@ for i in anshosts:
     vmcreate_cmd = "virt-install -n ans-"+str(ipstart)+" -r "+ansspec["mem"]+" --vcpus="+ansspec["cpu"]+" --os-type=Linux --os-variant=ubuntu20.04 --graphics=none --console pty,target_type=serial --network=bridge:br-mgmt,model=virtio --import --disk /var/lib/libvirt/images/ans-"+str(ipstart)+".qcow2 --noautoconsole -v"
     print ("\n vmcreate_cmd output: \n{}".format(vmcreate_cmd))
     chansssh.sendline(vmcreate_cmd)
-    time.sleep(10)
+    time.sleep(timeout)
     chansssh.expect(':~#')
     print ("\n Output of VIRT-INSTALL: {}".format(chansssh.before.decode()))
     vconsole = ("virsh console ans-{}".format(ipstart))
@@ -169,7 +170,7 @@ for i in conthosts:
     vmcreate_cmd = "virt-install -n cont-"+str(ipstart)+" -r "+contspec["mem"]+" --vcpus="+contspec["cpu"]+" --os-type=Linux --os-variant=ubuntu20.04 --graphics=none --console pty,target_type=serial --network=bridge:br-mgmt,model=virtio --import --disk /var/lib/libvirt/images/cont-"+str(ipstart)+".qcow2 --noautoconsole -v"
     print ("\n vmcreate_cmd output: \n{}".format(vmcreate_cmd))
     chconssh.sendline(vmcreate_cmd)
-    time.sleep(5)
+    time.sleep(timeout)
     chconssh.expect(':~#')
     print ("\n Output of VIRT-INSTALL: {}".format(chconssh.before.decode()))
     vconsole = ("virsh console cont-{}".format(ipstart))
@@ -289,7 +290,7 @@ for i in comphosts:
         print ("\n Output of diskresize: {}".format(chcompssh.before.decode()))
     vmcreate_cmd = "virt-install -n comp-"+str(ipstart)+" -r "+compspec["mem"]+" --vcpus="+compspec["cpu"]+" --os-type=Linux --os-variant=ubuntu20.04 --graphics=none --console pty,target_type=serial --network=bridge:br-mgmt,model=virtio --import --disk /var/lib/libvirt/images/comp-"+str(ipstart)+".qcow2 --noautoconsole -v"
     chcompssh.sendline(vmcreate_cmd)
-    time.sleep(5)
+    time.sleep(timeout)
     chcompssh.expect(':~#')
     print ("\n Output of VIRT-INSTALL: {}".format(chcompssh.before.decode()))
     vconsole = ("virsh console comp-{}".format(ipstart))
@@ -403,7 +404,7 @@ for i in strhosts:
     print ("\n Output of CP: {}".format(chstrssh.before.decode()))
     vmcreate_cmd = "virt-install -n str-"+str(ipstart)+" -r "+strspec["mem"]+" --vcpus="+strspec["cpu"]+" --os-type=Linux --os-variant=ubuntu20.04 --graphics=none --console pty,target_type=serial --network=bridge:br-mgmt,model=virtio --import --disk /var/lib/libvirt/images/str-"+str(ipstart)+".qcow2 --noautoconsole -v"
     chstrssh.sendline(vmcreate_cmd)
-    time.sleep(5)
+    time.sleep(timeout)
     chstrssh.expect(':~#')
     print ("\n Output of VIRT-INSTALL: {}".format(chstrssh.before.decode()))
     vconsole = ("virsh console str-{}".format(ipstart))
