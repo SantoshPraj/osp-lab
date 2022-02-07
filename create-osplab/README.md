@@ -7,6 +7,7 @@ virtualenv is used to manage Python packages for different projects. Using virtu
 
 
 HOW TO MAKE VIRTUAL ENVIORNMENT AND RUN SCRIPT ON THIS ?
+
 virtual env. wiil be make to as follow:-
 
 apt install python3
