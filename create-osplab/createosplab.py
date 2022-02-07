@@ -18,18 +18,19 @@ strspec = {"cpu": "4", "mem": "8192", "hdd": 100}
 ipblock = "192.168.1."
 ipstart = 211
 ipgw = "192.168.1.1"
-timeout = 120 #time to wait after instance creation
+tiout = 120 #time to wait after instance creation
+imgpath = "/home/himanshu/Ubuntu20-Cli-Img.qcow2"
 ##########################################Create Ansible VM############################################
 for i in anshosts:
     print ("\n Adding image for Ansible VM")
     print ("\n Ssh for Ansible hosts initiated")
-    ansiblessh = "ssh root@"+i
+    ansiblessh = "ssh -o StrictHostKeyChecking=no root@"+i
     chansssh = pexpect.spawn(ansiblessh)
     chansssh.expect('password:')
     chansssh.sendline('ubuntu')
     print ("\n Connected to ansible host {}".format(i))
     chansssh.expect(':~#')
-    scpcmd = 'sshpass -p "ubuntu" scp -o StrictHostKeyChecking=no root@'+fileserver+':/home/himanshu/Ubuntu20-Cli-Img.qcow2 /root/'
+    scpcmd = 'sshpass -p "ubuntu" scp -o StrictHostKeyChecking=no root@'+fileserver+':'+imgpath+' /root/'
     chansssh.sendline(scpcmd)
     time.sleep(30)
     chansssh.expect(':~#')
@@ -145,13 +146,13 @@ EOF""".format(str(ipstart), str(ipstart), str(ipstart), str(ipstart), ipsetin, i
 for i in conthosts:
     print ("\n Adding image for controller VM")
     print ("\n Ssh for control hosts initiated")
-    controlssh = "ssh root@"+i
+    controlssh = "ssh -o StrictHostKeyChecking=no root@"+i
     chconssh = pexpect.spawn(controlssh)
     chconssh.expect('password:')
     chconssh.sendline('ubuntu')
     print ("\n Connected to control host {}".format(i))
     chconssh.expect(':~#')
-    scpcmd = 'sshpass -p "ubuntu" scp -o StrictHostKeyChecking=no root@'+fileserver+':/home/himanshu/Ubuntu20-Cli-Img.qcow2 /root/'
+    scpcmd = 'sshpass -p "ubuntu" scp -o StrictHostKeyChecking=no root@'+fileserver+'+imgpath+' /root/'
     chconssh.sendline(scpcmd)
     time.sleep(30)
     chconssh.expect(':~#')
@@ -266,13 +267,13 @@ EOF""".format(str(ipstart), str(ipstart), str(ipstart), str(ipstart), ipsetin, i
 for i in comphosts:
     print ("\n Adding image for compute VM")
     print ("\n Ssh for compute hosts initiated")
-    computessh = "ssh root@"+i
+    computessh = "ssh -o StrictHostKeyChecking=no root@"+i
     chcompssh = pexpect.spawn(computessh)
     chcompssh.expect('password:')
     chcompssh.sendline('ubuntu')
     print ("\n Connected to compute host {}".format(i))
     chcompssh.expect(':~#')
-    scpcmd = 'sshpass -p "ubuntu" scp -o StrictHostKeyChecking=no root@'+fileserver+':/home/himanshu/Ubuntu20-Cli-Img.qcow2 /root/'
+    scpcmd = 'sshpass -p "ubuntu" scp -o StrictHostKeyChecking=no root@'+fileserver+'+imgpath+ /root/'
     chcompssh.sendline(scpcmd)
     time.sleep(30)
     chcompssh.expect(':~#')
@@ -382,13 +383,13 @@ EOF""".format(str(ipstart), str(ipstart), str(ipstart), str(ipstart), ipsetin, i
 for i in strhosts:
     print ("\n Adding image for Storage VM")
     print ("\n Ssh for Storage hosts initiated")
-    storagessh = "ssh root@"+i
+    storagessh = "ssh -o StrictHostKeyChecking=no root@"+i
     chstrssh = pexpect.spawn(storagessh)
     chstrssh.expect('password:')
     chstrssh.sendline('ubuntu')
     print ("\n Connected to storage host {}".format(i))
     chstrssh.expect(':~#')
-    scpcmd = 'sshpass -p "ubuntu" scp -o StrictHostKeyChecking=no root@'+fileserver+':/home/himanshu/Ubuntu20-Cli-Img.qcow2 /root/'
+    scpcmd = 'sshpass -p "ubuntu" scp -o StrictHostKeyChecking=no root@'+fileserver+'+imgpath+' /root/'
     chstrssh.sendline(scpcmd)
     time.sleep(30)
     chstrssh.expect(':~#')
