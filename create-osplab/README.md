@@ -24,9 +24,9 @@ python3 -m venv myenv
 
 source myenv/bin/activate
 
-chmod +x demo.py
+chmod +x createosplab.py
 
-./demo.py
+./createosplab.py
 
 
 Note: If there is no DHCP server in the environment. The VM console login might take up to 2-5 minutes to appear for login. Adjust the timeout accordingly
