@@ -10,9 +10,8 @@ virtual env. wiil be make to as follow:-
 
 apt install python3
 python3 --version
-apt install pip3
+apt install python3-pip
 pip3 --version
-python3 -m venv myenv
 apt install python3.8-venv
 python3 -m venv myenv
 source myenv/bin/activate
