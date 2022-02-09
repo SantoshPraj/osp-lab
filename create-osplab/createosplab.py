@@ -23,7 +23,6 @@ class colors:
         yellow='\033[93m'
         lightblue='\033[94m'
         pink='\033[95m'
-#print(colors.fg.blue,"\n Current Size of the partition is ",colors.fg.green,currentsize,colors.reset)
 ###############Generic Global Variables ##############################################
 fileserver = "192.168.1.54"
 anshosts = ["192.168.1.53"]
